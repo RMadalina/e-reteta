@@ -47,4 +47,6 @@ class Medicine extends Model
             'price' => $price,
         ]);
     }
+
+
 }

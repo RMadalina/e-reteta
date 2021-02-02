@@ -14,7 +14,7 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\DiagnoseController;
 use App\Http\Controllers\DeseaseController;
-
+use App\Http\Controllers\MedicineReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +48,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('admin/doctors', App\Http\Controllers\Admin\DoctorController::class );
         Route::resource('admin/pacients', App\Http\Controllers\Admin\PacientController::class );
         Route::resource('admin/medicines', App\Http\Controllers\Admin\MedicineController::class );
+        Route::get('admin/medicinesreport1', [App\Http\Controllers\Admin\MedicineControllerReport::class, 'reportMedicinesPerDoctor'])->name('medicinesreport1');
+        Route::get('admin/medicinesreport2', [App\Http\Controllers\Admin\MedicineControllerReport::class, 'reportMedicinesConsumption'])->name('medicinesreport2');
+        Route::get('admin/medicinesreport3', [App\Http\Controllers\Admin\MedicineControllerReport::class, 'reportAllRecipesPerPacient'])->name('medicinesreport3');
         Route::resource('admin/deseases', App\Http\Controllers\Admin\DeseaseController::class );
 
     });

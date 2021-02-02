@@ -76,10 +76,10 @@ class DiagnoseController extends Controller
             'doctor_id'=>$doctor->id,
         ]);
        // dd( $diagnose->id);
-        $recipe = Recipe::create([
-            'diagnose_id'=>$diagnose->id,
-            'hospital_id'=>$request->hospital_id,
-        ]);
+        // $recipe = Recipe::create([
+        //     'diagnose_id'=>$diagnose->id,
+        //     'hospital_id'=>$request->hospital_id,
+        // ]);
         return redirect()->route('diagnoses.index');
     }
 
@@ -92,6 +92,7 @@ class DiagnoseController extends Controller
      */
     public function edit(Diagnose $diagnose)
     {
+        dd($diagnose);
     
         if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
             abort(404);
@@ -140,13 +141,16 @@ class DiagnoseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diagnose $diagnose)
+    public function destroy(Request $request, Diagnose $diagnose)
     {
         if (!Auth::user()->hasRole(Role::DOCTOR_ROLE)) {
             abort(404);
         }
-
-        $diagnose->delete();
+     
+        //$diagnose = Diagnose::find(12);
+      //  dd($request);
+        $result = $diagnose->delete();
+        dd($result);
         return redirect()->route('diagnoses.index');
     }
 }

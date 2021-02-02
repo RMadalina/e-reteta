@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Recipe extends Model
 {
@@ -25,4 +26,6 @@ class Recipe extends Model
 
         return $this->belongsToMany(Medicine::class, 'recipes_medicines', 'recipe_id', 'medicinecode');
     }
+
+
 }

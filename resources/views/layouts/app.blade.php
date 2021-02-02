@@ -46,7 +46,15 @@
                             <li>
                                 <a class = "nav-link" href="{{route('pacients.index')}}" method ="POST">Pacienti</a>
                             </li>
-                            
+                            <li>
+                                <a class = "nav-link" href="{{route('medicinesreport1')}}" method ="POST">Raport 1</a>
+                            </li>
+                            <li>
+                                <a class = "nav-link" href="{{route('medicinesreport2')}}" method ="POST">Raport 2</a>
+                            </li>
+                            <li>
+                                <a class = "nav-link" href="{{route('medicinesreport3')}}" method ="POST">Raport 3</a>
+                            </li>                            
                             
                         @endrole
 

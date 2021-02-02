@@ -105,8 +105,25 @@ class MedicineController extends Controller
         if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
             abort(404);
         }
+        //dd($medicine);
 
         $medicine->delete();
         return redirect()->route('medicines.index');
     }
+
+        
+    /**
+     * Display medicine distibution per doctor.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reportQuantitiesPerDoctor()
+    {
+        // dd(Medicine::getAllByNameAscOrder());
+        // dd(Medicine::insertData('test', '1212', '123'));
+        $medicines = Medicine::getAllQuantitiesPerDoctor();
+        return view('admin.medicines.quantities', compact('medicines'));
+  }
+
+    
 }

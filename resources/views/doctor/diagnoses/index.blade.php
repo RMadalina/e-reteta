@@ -45,6 +45,8 @@
                               
                             <a href="{{route('recipes.create',['diagnose_id' => $diagnose->id])}}"
                               class="btn btn-sm btn-info">Reteta</a>
+
+
                             <form action="{{route('diagnoses.destroy', $diagnose->id)}}" method = "POST"
                                           style="display: inline-block">
                               @method('DELETE')

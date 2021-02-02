@@ -10,6 +10,7 @@ class Diagnose extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'cnp',
         'deseasecode',
         'doctor_id',
