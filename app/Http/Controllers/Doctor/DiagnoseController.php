@@ -90,14 +90,14 @@ class DiagnoseController extends Controller
      * @param  Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function edit(diagnose $diagnose)
+    public function edit(Diagnose $diagnose)
     {
     
         if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
             abort(404);
         }
 
-        return view('admin.diagnoses.edit', compact('diagnose'));
+        return view('doctor.diagnoses.edit', compact('diagnose'));
     }
 
     /**
@@ -107,26 +107,31 @@ class DiagnoseController extends Controller
      * @param  Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatediagnoseRequest $request, diagnose $diagnose)
+    public function update(StoreDiagnoseRequest $request, Diagnose $diagnose)
     {
         
-        if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
+        if (!Auth::user()->hasRole(Role::DOCTOR_ROLE)) {
             abort(404);
         }
-        $diagnose->update([
-            'age'=>$request->age,
-            'insurancetype' => $request->insurancetype, 
-            //'user_id'=>$user->id,
-        ]);
-        //dd($diagnose->cnp);
-        $diagnose->user->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-        ]);
         
-        
+        $user = Auth::user();
+        //$doctor = Doctor::where('user_id',$user->id)->first();
+        $doctor =  $user->doctor;
+        // if (!$doctor){
+        //   abort(404);
+        // }
+        $diagnose = Diagnose::update([
+            //'cnp'=>$request->cnp,
+            'deseasecode'=>$request->deseasecode,
+            'doctor_id'=>$doctor->id,
+        ]);
+       // dd( $diagnose->id);
+        $recipe = Recipe::update([
+            'diagnose_id'=>$diagnose->id,
+            'hospital_id'=>$request->hospital_id,
+        ]);
         return redirect()->route('diagnoses.index');
-
+        
     }
 
     /**
@@ -135,9 +140,9 @@ class DiagnoseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(diagnose $diagnose)
+    public function destroy(Diagnose $diagnose)
     {
-        if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
+        if (!Auth::user()->hasRole(Role::DOCTOR_ROLE)) {
             abort(404);
         }
 
