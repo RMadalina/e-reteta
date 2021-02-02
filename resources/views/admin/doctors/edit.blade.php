@@ -5,16 +5,16 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editeaza pacient') }}</div>
+                <div class="card-header">{{ __('Editeaza medic') }}</div>
 
                 <div class="card-body">
-                  <form action="{{route('pacients.update', $pacient->cnp)}}" method="POST">
+                  <form action="{{route('doctors.update', $doctor->id)}}" method="POST">
                     @method('PUT')
                     @csrf
                     <div class="form-group row">
-                      <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nume pacient') }}</label>
+                      <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nume medic') }}</label>
                       <div class="col-md-6">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $pacient->user->name }}" required autocomplete="name" autofocus>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $doctor->user->name }}" required autocomplete="name" autofocus>
 
                         @error('name')
                         <span class="invalid-feedback" role="alert">
@@ -25,11 +25,11 @@
                     </div>
                     <br><br>
                     <div class="form-group row">
-                      <label for="age" class="col-md-4 col-form-label text-md-right">{{ __('Varsta pacient') }}</label>
+                      <label for="stampno" class="col-md-4 col-form-label text-md-right">{{ __('Cod Stampila') }}</label>
                       <div class="col-md-6">
-                        <input id="age" type="text" class="form-control @error('age') is-invalid @enderror" name="age" value="{{ $pacient->age }}" required autocomplete="age" autofocus>
+                        <input id="stampno" type="text" class="form-control @error('stampno') is-invalid @enderror" name="stampno" value="{{ $doctor->stampno }}" required autocomplete="stampno" autofocus>
 
-                        @error('age')
+                        @error('stampno')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -38,11 +38,11 @@
                     </div>
                     <br><br>
                     <div class="form-group row">
-                      <label for="insurancetype" class="col-md-4 col-form-label text-md-right">{{ __('Tip asigurare pacient') }}</label>
+                      <label for="cascontract" class="col-md-4 col-form-label text-md-right">{{ __('Contract CAS') }}</label>
                       <div class="col-md-6">
-                        <input id="insurancetype" type="text" class="form-control @error('insurancetype') is-invalid @enderror" name="insurancetype" value="{{ $pacient->insurancetype }}" required autocomplete="insurancetype" autofocus>
+                        <input id="cascontract" type="text" class="form-control @error('cascontract') is-invalid @enderror" name="cascontract" value="{{ $doctor->cascontract }}" required autocomplete="cascontract" autofocus>
 
-                        @error('insurancetype')
+                        @error('cascontract')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -51,9 +51,9 @@
                     </div>
                     <br><br>
                     <div class="form-group row">
-                      <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email pacient') }}</label>
+                      <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email medic') }}</label>
                       <div class="col-md-6">
-                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $pacient->user->email }}" required autocomplete="email" autofocus>
+                        <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $doctor->user->email }}" required autocomplete="email" autofocus>
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -65,7 +65,7 @@
                     <div class="form-group row mb-0">
                       <div class="col-md-8 offset-md-4">
                           <button type="submit" class="btn btn-primary">
-                            {{ __('Salveaza pacient') }}
+                            {{ __('Salveaza medic') }}
                           </button>
                       </div>
                     </div>

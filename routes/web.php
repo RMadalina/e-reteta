@@ -9,9 +9,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\HospitalController;
 use App\Http\Controllers\PacientController;
+use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\DiagnoseController;
+use App\Http\Controllers\DeseaseController;
 
 
 /*
@@ -43,8 +45,10 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['middleware' => 'role:' . Models\Role::ADMIN_ROLE], function() {
         Route::resource('admin/hospitals',  App\Http\Controllers\Admin\HospitalController::class );
+        Route::resource('admin/doctors', App\Http\Controllers\Admin\DoctorController::class );
         Route::resource('admin/pacients', App\Http\Controllers\Admin\PacientController::class );
         Route::resource('admin/medicines', App\Http\Controllers\Admin\MedicineController::class );
+        Route::resource('admin/deseases', App\Http\Controllers\Admin\DeseaseController::class );
 
     });
     Route::group(['middleware' => 'role:' . Models\Role::DOCTOR_ROLE], function() {

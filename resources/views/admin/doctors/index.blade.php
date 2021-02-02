@@ -5,37 +5,33 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Pacient') }}</div>
+                <div class="card-header">{{ __('Medic') }}</div>
 
                 <div class="card-body">
-                  <a href="{{route('pacients.create')}}"
-                      class ="btn btn-primary">Adauga pacient nou</a><br><br>
+                  <a href="{{route('doctors.create')}}"
+                      class ="btn btn-primary">Adauga medic nou</a><br><br>
                     <table class = "table">
                       <thead>
                         <tr>
                           <th>Nume</th>
-                          <th>CNP</th>
-                          <th>Varsta</th>
-                          <th>Tip Asigurare</th>
+                          <th>Cod Stampila</th>
+                          <th>Contract CAS</th>
                           <th>Email</th>
-                          
-                          <th></th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                      @forelse($pacients as $pacient)
+                      @forelse($doctors as $doctor)
                         <tr>
-                          <td>{{$pacient->user->name}}</td>
-                          <td>{{$pacient->cnp}}</td>
-                          <td>{{$pacient->age}}</td>
-                          <td>{{$pacient->insurancetype}}</td>
-                          <td>{{$pacient->user->email}}</td>
+                          <td>{{$doctor->user->name}}</td>
+                          <td>{{$doctor->stampno}}</td>
+                          <td>{{$doctor->cascontract}}</td>
+                          <td>{{$doctor->user->email}}</td>
                           
                           <td>
-                            <a href="{{route('pacients.edit', $pacient->cnp)}}"
+                            <a href="{{route('doctors.edit', $doctor->id)}}"
                               class="btn btn-sm btn-info">Editeaza</a>
-                            <form action="{{route('pacients.destroy', $pacient->cnp)}}" method = "POST"
+                            <form action="{{route('doctors.destroy', $doctor->id)}}" method = "POST"
                                           style="display: inline-block">
                               @method('DELETE')
                               @csrf
@@ -47,7 +43,7 @@
                         </tr>
                       @empty
                         <tr>
-                          <td colspan = "4"> Lista de pacienti vida!</td>
+                          <td colspan = "4"> Lista de medici vida!</td>
                         </tr>
                       @endforelse
                       </tbody>

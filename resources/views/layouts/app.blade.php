@@ -38,6 +38,9 @@
                                 <a class = "nav-link" href="{{route('hospitals.index')}}" method ="POST">Clinici</a>
                             </li>
                             <li>
+                                <a class = "nav-link" href="{{route('doctors.index')}}" method ="POST">Medici</a>
+                            </li>
+                            <li>
                                 <a class = "nav-link" href="{{route('medicines.index')}}" method ="POST">Medicamente</a>
                             </li>
                             <li>
@@ -50,6 +53,9 @@
                         @role(\App\Models\Role::DOCTOR_ROLE)
                         <li>
                             <a class = "nav-link" href="{{route('diagnoses.index')}}" method ="POST">Diagnostice</a>
+                        </li>
+                        <li>
+                            <a class = "nav-link" href="{{route('recipes.index')}}" method ="POST">Retete</a>
                         </li>
                         @endrole
 
