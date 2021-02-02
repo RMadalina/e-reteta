@@ -48,6 +48,21 @@
                       </div>               
                     </div>
                     <br><br>
+                    <div class="form-group row">
+                      <label for="hospital_id" class="col-md-4 col-form-label text-md-right">{{ __('Spital') }}</label>
+                      <div class="col-md-6">
+                        <select name="hospital_id" id="hospital_id">
+                          
+                          <option value="">--Alege--</option>
+
+                              @foreach($hospitals as $hospital)
+                      
+                              <option value="{{$hospital->id}}">{{$hospital->name}}</option>
+                              @endforeach
+                        </select>   
+                      </div>               
+                    </div>
+                    <br><br>
                  
                     <div class="form-group row mb-0">
                       <div class="col-md-8 offset-md-4">

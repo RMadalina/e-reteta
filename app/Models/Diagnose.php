@@ -31,4 +31,8 @@ class Diagnose extends Model
 
         return $this->hasOne(Doctor::class,'id', 'doctor_id');
     }
+    public function recipe(){
+
+        return $this->belongsTo(Recipe::class, 'id','diagnose_id');
+    }
 }

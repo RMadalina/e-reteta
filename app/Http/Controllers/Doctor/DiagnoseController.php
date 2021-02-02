@@ -10,6 +10,8 @@ use App\Models\Diagnose;
 use App\Models\Desease;
 use App\Models\Doctor;
 use App\Models\Pacient;
+use App\Models\Hospital;
+use App\Models\Recipe;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -41,9 +43,10 @@ class DiagnoseController extends Controller
         }
         $pacients = Pacient::orderBy('cnp', 'asc')->get();
         $deseases = Desease::orderBy('name', 'asc')->get();
+        $hospitals = Hospital::orderBy('name', 'asc')->get();
   
         
-        return view('doctor.diagnoses.create', compact('pacients', 'deseases'));
+        return view('doctor.diagnoses.create', compact('pacients', 'deseases', 'hospitals'));
     }
 
     /**
@@ -71,6 +74,11 @@ class DiagnoseController extends Controller
             'cnp'=>$request->cnp,
             'deseasecode'=>$request->deseasecode,
             'doctor_id'=>$doctor->id,
+        ]);
+       // dd( $diagnose->id);
+        $recipe = Recipe::create([
+            'diagnose_id'=>$diagnose->id,
+            'hospital_id'=>$request->hospital_id,
         ]);
         return redirect()->route('diagnoses.index');
     }

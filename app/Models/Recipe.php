@@ -10,14 +10,19 @@ class Recipe extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'diagnose_id',
+        'hospital_id',
        
     ];
 
 
 
+    public function recipeMedicines(){
+
+        return $this->hasMany(RecipeMedicine::class);
+    }
     public function medicines(){
 
-        return $this->hasMany(Medicine::class);
+        return $this->belongsToMany(Medicine::class, 'recipes_medicines', 'recipe_id', 'medicinecode');
     }
 }

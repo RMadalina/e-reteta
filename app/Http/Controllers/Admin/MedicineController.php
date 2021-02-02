@@ -20,6 +20,8 @@ class MedicineController extends Controller
      */
     public function index()
     {
+        // dd(Medicine::getAllByNameAscOrder());
+        // dd(Medicine::insertData('test', '1212', '123'));
         $medicines = Medicine::orderBy('medicinecode', 'asc')->get();
         return view('admin.medicines.index', compact('medicines'));
   }

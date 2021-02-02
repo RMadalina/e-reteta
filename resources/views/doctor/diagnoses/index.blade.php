@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-header">{{ __('Diagnostice') }}</div>
 
@@ -18,7 +18,8 @@
                           <th>Pacient</th>
                           <th>Boala</th>
                           <th>Medic</th>
-                          <th>Data</th>
+                          <th>Reteta</th>
+                         
                           <th></th>
                         </tr>
                       </thead>
@@ -29,7 +30,15 @@
                           <td>{{$diagnose->pacient->user->name}}</td>
                           <td>{{$diagnose->desease->name}}</td>
                           <td>{{$diagnose->doctor->user->name}}</td>
-                          <td>{{$diagnose->created_at  }}</td>
+                          <td>
+                            @if($diagnose->recipe)
+                            <ul>
+                              @foreach ($diagnose->recipe->recipeMedicines as $recipeMedicine)
+                                <li>{{ $recipeMedicine->medicine->name }} - {{ $recipeMedicine->quantity }}</li>
+                              @endforeach
+                            </ul>
+                            @endif
+                          </td>
                           <td>
                             <a href="{{route('diagnoses.edit', $diagnose->id)}}"
                               class="btn btn-sm btn-info">Editeaza</a>

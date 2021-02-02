@@ -22,25 +22,25 @@ class PacientSeeder extends Seeder
                 [
                     'cnp' => 1741201163464,
                     'age'=>46,
-                    'insurancetype'=>'A',
+                    'insurancetype'=>'Angajat',
                     'user_id'=>4,
                 ],
                 [
                     'cnp' => 2410211634645,
                     'age'=>70,
-                    'insurancetype'=>'B',
+                    'insurancetype'=>'Pensionar',
                     'user_id'=>5,
                 ],
                 [
                     'cnp' => 1641201163464,
                     'age'=>56,
-                    'insurancetype'=>'C',
+                    'insurancetype'=>'Somer',
                     'user_id'=>6,
                 ],
                 [
                     'cnp' => 2781201163464,
                     'age'=>42,
-                    'insurancetype'=>'D',
+                    'insurancetype'=>'Angajat',
                     'user_id'=>7,
                 ],
                 
