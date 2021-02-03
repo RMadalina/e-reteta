@@ -37,6 +37,11 @@ class RecipeSeeder extends Seeder
                     'hospital_id'=>1,
  
                 ],
+                [
+                    'diagnose_id'=>4,
+                    'hospital_id'=>1,
+ 
+                ],
                 
                 
             ]);

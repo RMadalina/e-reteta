@@ -49,7 +49,30 @@ class RecipeMedicineSeeder extends Seeder
                     'quantity'=>5,
                  
                 ],
-                
+                [
+                  'recipe_id' => 3,
+                    'medicinecode'=>134,
+                    'quantity'=>10,
+                 
+                ],
+                [
+                  'recipe_id' => 4,
+                    'medicinecode'=>2134,
+                    'quantity'=>5,
+                 
+                ],
+                [
+                  'recipe_id' => 4,
+                    'medicinecode'=>284,
+                    'quantity'=>5,
+                 
+                ],
+                [
+                  'recipe_id' => 4,
+                    'medicinecode'=>124,
+                    'quantity'=>5,
+                 
+                ],
                 
             ]);
         }

@@ -12,23 +12,26 @@
                     <table class = "table">
                       <thead>
                         <tr>
-                          <th>Denumire</th>
-                          <th>Cod Medicament</th>
-                          <th>Pret</th>
+                          <th>Id Medic</th>
+                          <th>Medic</th>
+                          <th>Medicament</th>
+                          <th>Cantitate</th>
+                          <th>Valoare</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                      @forelse($medicines as $medicine)
+                      @forelse($doctors as $doctor)
                         <tr>
-                          <td>{{$medicine->id}}</td>
-                          <td>{{$medicine->name}}</td>
-                          <td>{{$medicine->medicinesVolume}}</td>
-                          <td>{{$medicine->medicinesValue}}</td>
+                          <td>{{$doctor->id }}</td>
+                          <td>{{$doctor->name}}</td>
+                          <td>{{$doctor->medicinename}}</td>
+                          <td>{{$doctor->medicinesVolume}}</td>
+                          <td>{{$doctor->medicinesValue}}</td>
                         </tr>
                       @empty
                         <tr>
-                          <td colspan = "4"> Lista de diagnostice vida!</td>
+                          <td colspan = "4"> Lista vida!</td>
                         </tr>
                       @endforelse
                       </tbody>

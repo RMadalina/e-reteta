@@ -34,37 +34,45 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @role(\App\Models\Role::ADMIN_ROLE)
-                            <li class="nav-item">
-                                <a class = "nav-link" href="{{route('hospitals.index')}}" method ="POST">Clinici</a>
-                            </li>
+                            
                             <li>
                                 <a class = "nav-link" href="{{route('doctors.index')}}" method ="POST">Medici</a>
-                            </li>
-                            <li>
-                                <a class = "nav-link" href="{{route('medicines.index')}}" method ="POST">Medicamente</a>
                             </li>
                             <li>
                                 <a class = "nav-link" href="{{route('pacients.index')}}" method ="POST">Pacienti</a>
                             </li>
                             <li>
-                                <a class = "nav-link" href="{{route('medicinesreport1')}}" method ="POST">Raport 1</a>
+                                <a class = "nav-link" href="{{route('medicines.index')}}" method ="POST">Medicamente</a>
                             </li>
-                            <li>
-                                <a class = "nav-link" href="{{route('medicinesreport2')}}" method ="POST">Raport 2</a>
+                            <li class="nav-item">
+                                <a class = "nav-link" href="{{route('hospitals.index')}}" method ="POST">Clinici</a>
                             </li>
-                            <li>
-                                <a class = "nav-link" href="{{route('medicinesreport3')}}" method ="POST">Raport 3</a>
-                            </li>                            
                             
+                                                 
+                            <li class="dropdown nav-link">
+                                <a class="dropdown-toggle"  style="color:rgba(0, 0, 0, 0.5)" data-toggle="dropdown" href="#">Rapoarte
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class = "nav-link" href="{{route('medicinesreport1')}}" method ="POST">Raport Medicamente per Doctor</a>
+                                    </li>
+                                    <li>
+                                        <a class = "nav-link" href="{{route('medicinesreport2')}}" method ="POST">Raport Medicamente</a>
+                                    </li>
+                                    <li>
+                                        <a class = "nav-link" href="{{route('medicinesreport3')}}" method ="POST">Raport Retete per Pacient</a>
+                                    </li>       
+                                </ul>
+                              </li>
                         @endrole
 
                         @role(\App\Models\Role::DOCTOR_ROLE)
                         <li>
-                            <a class = "nav-link" href="{{route('diagnoses.index')}}" method ="POST">Diagnostice</a>
+                            <a class = "nav-link" href="{{route('diagnoses.index')}}" method ="POST">Retete</a>
                         </li>
-                        <li>
+                        <!--<li>
                             <a class = "nav-link" href="{{route('recipes.index')}}" method ="POST">Retete</a>
-                        </li>
+                        </li>-->
                         @endrole
 
                     </ul>

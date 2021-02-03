@@ -5,21 +5,21 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Diagnostice') }}</div>
+                <div class="card-header">{{ __('Retete') }}</div>
 
                 <div class="card-body">
                   <a href="{{route('diagnoses.create')}}"
-                    class ="btn btn-primary">Adauga diagnostic nou</a><br><br>
+                    class ="btn btn-primary">Adauga reteta</a><br><br>
                     
                     <table class = "table">
                       <thead>
                         <tr>
                           <th>Id</th>
+                          <th>Data</th>
                           <th>Pacient</th>
                           <th>Boala</th>
                           <th>Medic</th>
                           <th>Reteta</th>
-                         
                           <th></th>
                         </tr>
                       </thead>
@@ -27,6 +27,7 @@
                       @forelse($diagnoses as $diagnose)
                         <tr>
                           <td>{{$diagnose->id}}</td>
+                          <td>{{ date('d-m-Y', strtotime($diagnose->created_at))}}</td>
                           <td>{{$diagnose->pacient->user->name}}</td>
                           <td>{{$diagnose->desease->name}}</td>
                           <td>{{$diagnose->doctor->user->name}}</td>
@@ -43,8 +44,8 @@
                             <a href="{{route('diagnoses.edit', $diagnose->id)}}"
                               class="btn btn-sm btn-info">Editeaza</a>
                               
-                            <a href="{{route('recipes.create',['diagnose_id' => $diagnose->id])}}"
-                              class="btn btn-sm btn-info">Reteta</a>
+                          <!--  <a href="{{route('recipes.create',['diagnose_id' => $diagnose->id])}}"
+                              class="btn btn-sm btn-info">Reteta</a>-->
 
 
                             <form action="{{route('diagnoses.destroy', $diagnose->id)}}" method = "POST"

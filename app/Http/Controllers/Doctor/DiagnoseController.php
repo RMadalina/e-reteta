@@ -150,7 +150,7 @@ class DiagnoseController extends Controller
         //$diagnose = Diagnose::find(12);
       //  dd($request);
         $result = $diagnose->delete();
-        dd($result);
+        //dd($result);
         return redirect()->route('diagnoses.index');
     }
 }

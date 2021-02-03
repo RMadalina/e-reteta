@@ -24,8 +24,8 @@ class MedicineControllerReport extends Controller
     public function reportMedicinesPerDoctor()
     {
 
-        $medicines = $this->getAllQuantitiesPerDoctor();
-        return view('admin.reports.medicines-per-doctor', compact('medicines'));
+        $doctors = $this->getAllQuantitiesPerDoctor();
+        return view('admin.reports.medicines-per-doctor', compact('doctors'));
     }
 
   public function reportMedicinesConsumption()
@@ -54,35 +54,51 @@ class MedicineControllerReport extends Controller
   public static function getAllQuantitiesPerDoctor()
   {
       return DB::select(DB::raw(
-                     'SELECT n.id, n.name, SUM(quantity) as medicinesVolume , SUM(quantity * price) as medicinesValue
-          FROM (
-           SELECT 
-                  distinct dr.id,
-                  u.name,
-                  d.id AS diagnostic_id,
-                  r.id AS reteta_id, 
-                  m.medicinecode,
-                  r_m.quantity,
-                  m.price
+                // 'SELECT n.id, n.name, SUM(quantity) as medicinesVolume , SUM(quantity * price) as medicinesValue
+                //   FROM (
+                //    SELECT 
+                //   distinct dr.id,
+                //   u.name,
+                //   d.id AS diagnostic_id,
+                //   r.id AS reteta_id, 
+                //   m.medicinecode,
+                //   r_m.quantity,
+                //   m.price
                 
-                FROM 
-                  pacients p,
-                  users u,
-                  recipes r, 
-                  diagnoses d,
-                  recipes_medicines r_m,
-                  medicines m,
-                  doctors dr
+                // FROM 
+                //   pacients p,
+                //   users u,
+                //   recipes r, 
+                //   diagnoses d,
+                //   recipes_medicines r_m,
+                //   medicines m,
+                //   doctors dr
         
-                WHERE 
-                u.id = dr.user_id
-                  AND dr.id = d.doctor_id
-                  AND d.id = r.diagnose_id 
-                  AND r.id = r_m.recipe_id 
-                  AND r_m.medicinecode = m.medicinecode
+                // WHERE 
+                // u.id = dr.user_id
+                //   AND dr.id = d.doctor_id
+                //   AND d.id = r.diagnose_id 
+                //   AND r.id = r_m.recipe_id 
+                //   AND r_m.medicinecode = m.medicinecode
         
-                ORDER BY dr.id
-                )n GROUP BY n.id, n.name
+                // ORDER BY dr.id
+                // )n GROUP BY n.id, n.name'
+
+           '  SELECT dr.id, u.name, m.medicinecode, m.name as medicinename, SUM(quantity) as medicinesVolume, SUM(quantity * price) as medicinesValue
+           FROM doctors dr 
+           INNER JOIN users u
+           ON dr.user_id = u.id
+           INNER JOIN diagnoses d 
+           ON dr.id = d.doctor_id
+           INNER JOIN recipes r
+           ON d.id= r.diagnose_id
+           INNER JOIN recipes_medicines rm
+           ON r.id = rm.recipe_id
+           INNER JOIN medicines m
+           ON rm.medicinecode = m.medicinecode
+           
+           
+           GROUP BY dr.id, u.name, m.medicinecode, m.name
       '));
   }
 
