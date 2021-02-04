@@ -38,6 +38,11 @@ class User extends Authenticatable
 
         return $this->belongsTo(Doctor::class,'id','user_id');
     }
+
+    public function pacient(){
+
+        return $this->belongsTo(Pacient::class,'id','user_id');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

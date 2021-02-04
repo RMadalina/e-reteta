@@ -70,9 +70,14 @@
                         <li>
                             <a class = "nav-link" href="{{route('diagnoses.index')}}" method ="POST">Retete</a>
                         </li>
-                        <!--<li>
-                            <a class = "nav-link" href="{{route('recipes.index')}}" method ="POST">Retete</a>
-                        </li>-->
+                       
+                        @endrole
+
+                        @role(\App\Models\Role::PACIENT_ROLE)
+                        <li>
+                            <a class = "nav-link" href="{{route('recipes.index')}}" method ="POST">Retete </a>
+                        </li>
+                        
                         @endrole
 
                     </ul>

@@ -15,6 +15,7 @@ use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\DiagnoseController;
 use App\Http\Controllers\DeseaseController;
 use App\Http\Controllers\MedicineReportController;
+use App\Http\Controllers\RecipesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,11 +56,13 @@ Route::group(['middleware' => 'auth'], function() {
 
     });
     Route::group(['middleware' => 'role:' . Models\Role::DOCTOR_ROLE], function() {
-        Route::resource('doctor/diagnoses',  App\Http\Controllers\Doctor\DiagnoseController::class );
-        Route::resource('doctor/recipes', App\Http\Controllers\Doctor\RecipeController::class );
-       
+        Route::resource('doctor/diagnoses',  App\Http\Controllers\Doctor\DiagnoseController::class ); 
 
     });
+    Route::group(['middleware' => 'role:' . Models\Role::PACIENT_ROLE], function() {
+        Route::resource('pacient/recipes',  App\Http\Controllers\Pacient\RecipesController::class );
+    });
+
 
     
 
