@@ -37,7 +37,7 @@
                             @if($diagnose->recipe)
                             <ul>
                               @foreach ($diagnose->recipe->recipeMedicines as $recipeMedicine)
-                                <li>{{ $recipeMedicine->medicine->name }} - {{ $recipeMedicine->quantity }}</li>
+                                <li>{{ $recipeMedicine->medicine->name }}  -  {{ $recipeMedicine->quantity }}</li>
                               @endforeach
                             </ul>
                             @endif
