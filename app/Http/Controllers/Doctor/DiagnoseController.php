@@ -11,6 +11,8 @@ use App\Models\Desease;
 use App\Models\Doctor;
 use App\Models\Pacient;
 use App\Models\Hospital;
+use App\Models\Medicine;
+use App\Models\RecipeMedicine;
 use App\Models\Recipe;
 use App\Models\User;
 use App\Models\Role;
@@ -26,7 +28,13 @@ class DiagnoseController extends Controller
      */
     public function index()
     {
-        $diagnoses = Diagnose::orderBy('id', 'asc')->get();
+        $user = Auth::user();
+       
+        $doctor =  $user->doctor;
+        if (!$doctor){
+          abort(404);
+        }
+        $diagnoses = Diagnose::where('doctor_id',$doctor->id)->orderBy('id', 'asc')->get();
         return view('doctor.diagnoses.index', compact('diagnoses'));
   }
 
@@ -44,9 +52,10 @@ class DiagnoseController extends Controller
         $pacients = Pacient::orderBy('cnp', 'asc')->get();
         $deseases = Desease::orderBy('name', 'asc')->get();
         $hospitals = Hospital::orderBy('name', 'asc')->get();
+        $medicines = Medicine::orderBy('name', 'asc')->get();
   
         
-        return view('doctor.diagnoses.create', compact('pacients', 'deseases', 'hospitals'));
+        return view('doctor.diagnoses.create', compact('pacients', 'deseases', 'hospitals', 'medicines'));
     }
 
     /**
@@ -57,6 +66,8 @@ class DiagnoseController extends Controller
      */
     public function store(StoreDiagnoseRequest $request)
     {
+      
+      
 
         //dd($request);
         // if (!Auth::user()->hasRole(Role::ADMIN_ROLE)) {
@@ -76,10 +87,28 @@ class DiagnoseController extends Controller
             'doctor_id'=>$doctor->id,
         ]);
        // dd( $diagnose->id);
-        // $recipe = Recipe::create([
-        //     'diagnose_id'=>$diagnose->id,
-        //     'hospital_id'=>$request->hospital_id,
-        // ]);
+         $recipe = Recipe::create([
+             'diagnose_id'=>$diagnose->id,
+             'hospital_id'=>$request->hospital_id,
+         ]);
+
+         $medicinecodes = $request->medicinecode;
+         $quantities = $request->quantity;
+        // dd($quantities[0]);
+         for ($i = 0; $i < count($medicinecodes); $i++){
+            $medicinecode = $medicinecodes[$i];
+            $quantity = $quantities[$i];
+           
+            if ($quantity>0){
+                RecipeMedicine::create([
+                    'recipe_id'=>$recipe->id,
+                    'medicinecode'=>$medicinecode,
+                    'quantity'=>$quantity,
+                ]);
+            }
+         }
+        
+         
         return redirect()->route('diagnoses.index');
     }
 
@@ -109,8 +138,7 @@ class DiagnoseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(StoreDiagnoseRequest $request, Diagnose $diagnose)
-    {
-        
+    { 
         if (!Auth::user()->hasRole(Role::DOCTOR_ROLE)) {
             abort(404);
         }
@@ -131,6 +159,9 @@ class DiagnoseController extends Controller
             'diagnose_id'=>$diagnose->id,
             'hospital_id'=>$request->hospital_id,
         ]);
+
+      
+        
         return redirect()->route('diagnoses.index');
         
     }

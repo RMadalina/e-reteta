@@ -27,5 +27,8 @@ class Recipe extends Model
         return $this->belongsToMany(Medicine::class, 'recipes_medicines', 'recipe_id', 'medicinecode');
     }
 
+    public function hospital(){
 
+        return $this->belongsTo(Hospital::class);
+    }
 }

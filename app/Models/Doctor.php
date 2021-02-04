@@ -12,6 +12,7 @@ class Doctor extends Model
     protected $fillable = [
         'stampno',
         'cascontract',
+        'user_id',
         
     ];
 

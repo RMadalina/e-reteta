@@ -64,11 +64,12 @@ class DoctorController extends Controller
             'role_id'=>2,
         ]);
         
-        $doctor = doctor::create([
+        $doctor = Doctor::create([
             'stampno'=>$request->stampno,
             'cascontract'=>$request->cascontract,
             'user_id'=>$user->id,
         ]);
+
         return redirect()->route('doctors.index');
     }
 

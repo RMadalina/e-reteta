@@ -29,6 +29,7 @@ class StoreMedicineRequest extends FormRequest
           'medicinecode'=>[
             'required',
             'numeric',
+            Rule::unique('medicines')->ignore($this->medicine)
         ],
             'name'=> [
                 'required',

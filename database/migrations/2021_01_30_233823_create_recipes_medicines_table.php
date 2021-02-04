@@ -14,10 +14,11 @@ class CreateRecipesMedicinesTable extends Migration
     public function up()
     {
         Schema::create('recipes_medicines', function (Blueprint $table) {
-            $table->foreignId('recipe_id')->constrained();
+            $table->foreignId('recipe_id')->constrained()->onDelete('cascade');
             $table->integer('medicinecode');
-            $table->foreign('medicinecode')->references('medicinecode')->on('medicines');
+            $table->foreign('medicinecode')->references('medicinecode')->on('medicines')->onDelete('cascade');
             $table->integer('quantity');
+            $table->timestamps();
         });
     }
 

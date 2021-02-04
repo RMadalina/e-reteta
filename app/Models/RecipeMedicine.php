@@ -9,6 +9,13 @@ class RecipeMedicine extends Model
 {
     use HasFactory;
     protected $table ='recipes_medicines';
+    protected $fillable = [
+        'recipe_id',
+        'medicinecode',
+        'quantity',
+       
+    ];
+
     public function recipe(){
 
         return $this->hasOne(Recipe::class, 'recipe_id','id');

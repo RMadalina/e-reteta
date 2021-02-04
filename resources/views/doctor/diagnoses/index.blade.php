@@ -17,9 +17,10 @@
                           <th>Id</th>
                           <th>Data</th>
                           <th>Pacient</th>
-                          <th>Boala</th>
+                          <th>Diagnostic</th>
+                          <th>Clinica</th>
                           <th>Medic</th>
-                          <th>Reteta</th>
+                          <th>Medicamente</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -30,7 +31,8 @@
                           <td>{{ date('d-m-Y', strtotime($diagnose->created_at))}}</td>
                           <td>{{$diagnose->pacient->user->name}}</td>
                           <td>{{$diagnose->desease->name}}</td>
-                          <td>{{$diagnose->doctor->user->name}}</td>
+                          <td>{{$diagnose->recipe->hospital->name}}, {{$diagnose->recipe->hospital->county}}, {{$diagnose->recipe->hospital->fiscalcode}} </td>
+                          <td>{{$diagnose->doctor->user->name}} (CAS:{{ $diagnose->doctor->cascontract}})</td>
                           <td>
                             @if($diagnose->recipe)
                             <ul>
@@ -40,12 +42,14 @@
                             </ul>
                             @endif
                           </td>
+                         
                           <td>
+                            <!--
                             <a href="{{route('diagnoses.edit', $diagnose->id)}}"
                               class="btn btn-sm btn-info">Editeaza</a>
                               
-                          <!--  <a href="{{route('recipes.create',['diagnose_id' => $diagnose->id])}}"
-                              class="btn btn-sm btn-info">Reteta</a>-->
+                           <a href="{{route('recipes.create',['diagnose_id' => $diagnose->id])}}"
+                              class="btn btn-sm btn-info">Reteta</a>
 
 
                             <form action="{{route('diagnoses.destroy', $diagnose->id)}}" method = "POST"
@@ -56,6 +60,7 @@
                                       onclick="return confirm('Sunteti sigur ca doriti sa stergeti?')"
                                       class = "btn btn-sm btn-danger">Sterge</button>
                             </form>
+                          -->
                           </td>
                         </tr>
                       @empty

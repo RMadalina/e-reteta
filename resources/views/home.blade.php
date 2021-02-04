@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('e-Reteta va ajuta sa gestionati pacientii si retetele. ') }}
                 </div>
             </div>
         </div>
