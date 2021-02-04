@@ -1,5 +1,6 @@
 e-Reteta
 ========
+Radu Mioara-Madalina - Info 231
 
 Aplicatia realizeaza managementul clinicilor, medicilor, retetelor si pacientilor.
 
@@ -19,6 +20,8 @@ Pentru realizarea aplicatiei, am utilizat urmatoarele:
 * HTML
 * CSS
 * Bootstrap
+ 
+Proiectul este disponibil la adresa: https://github.com/RMadalina/e-reteta
 
 
 Schema Bazei de Date
@@ -38,6 +41,33 @@ Tabele utilizate in cadrul aplicatiei sunt urmatoarele:
 * `Diagnoses` - retine diagnosticele create de catre medici (cod boala, CNP, id medic), folosite apoi in crearea retetelor
 * `Recipes`   - retine detaliile retetelor emise de medic
 * `Recipes-Medicines` - tabela de legatura dintre retete si medicamente (tratamentul prescris intr-o reteta - cod medicament si cantitati)
+
+In diagrama se observa cheile primare si chelile straine pentru fiecare tabela.
+
+Conectarea la serverul de baze de date Oracle este definita in fisierul `.env` din radacina aplicatiei:
+``` ini
+DB_CONNECTION=oracle
+DB_HOST=127.0.0.1
+DB_PORT=1521
+DB_DATABASE=xe
+DB_USERNAME=STUDENT
+DB_PASSWORD=STUDENT
+```
+
+Pentru a permite conectarea la Oracle din PHP trebuie sa activam modulul dedicat acestui tip server in fisierul `php.ini`:
+```ini
+extension=php_oci8.dll
+extension=php_oci8_11g.dll
+```
+
+Diagrama de Clase
+-----------------
+In figura urmatoare sunt prezentate principalele pachete ale aplicatiei sub forma de diagrame UML:
+
+![](doc/images/uml/admin-controllers.png "Clasele Controller ale Administratorlului")
+
+![](doc/images/uml/doctor-controllers.png "Clasele Controller ale Doctorlului")
+![](doc/images/uml/models.png "Clasele ce modeleaza Entitatile")
   
 Descrierea Aplicatiei
 ---------------------
