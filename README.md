@@ -1,6 +1,5 @@
 e-Reteta
 ========
-Radu Mioara-Madalina - Info 231
 
 Aplicatia realizeaza managementul clinicilor, medicilor, retetelor si pacientilor.
 
@@ -13,21 +12,18 @@ Utilizatorii trebuie sa se autentifice cu user si parola pentru a putea realiza 
 Medicii sunt introdusi in sistem de catre Administrator, in schimb, Pacientii se pot inregistra siguri, utilizand un formular de inregistrare, sau pot fi introdusi de catre Administrator. 
 
 Pentru realizarea aplicatiei, am utilizat urmatoarele:
-* Oracle Server 11g
+* MySQL Server
 * Apache HTTP Server
 * PHP 
 * Framework-ul Laravel 8
 * HTML
 * CSS
 * Bootstrap
- 
-Proiectul este disponibil la adresa: https://github.com/RMadalina/e-reteta
-
 
 Schema Bazei de Date
 --------------------
 In figura urmatoare este prezentata schema bazei de date:
-![Schema Bazei de date](doc/images/db_reteta_oracle.png "Schema Bazei de Date")
+![Schema Bazei de date](doc/images/db_reteta_mysql.png "Schema Bazei de Date")
 
 Tabele utilizate in cadrul aplicatiei sunt urmatoarele:
 
@@ -46,19 +42,58 @@ In diagrama se observa cheile primare si chelile straine pentru fiecare tabela.
 
 Conectarea la serverul de baze de date Oracle este definita in fisierul `.env` din radacina aplicatiei:
 ``` ini
-DB_CONNECTION=oracle
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
-DB_PORT=1521
-DB_DATABASE=xe
-DB_USERNAME=STUDENT
-DB_PASSWORD=STUDENT
+DB_PORT=3306
+DB_DATABASE=e-reteta
+DB_USERNAME=root
+DB_PASSWORD=
 ```
+Instalare
+---------
+Pentru a instala aplicatia in XAMPP se vor realiza urmatorii pasi:
+1) Configuram un virtual host care sa pointeze catre folderul `e-reteta/public`.
+   In acest sens editam fisierul  `xampp\apache\conf\extra\httpd-vhosts.conf` si adaugam:
+   ```apacheconf
+    <VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+        DocumentRoot "C:/Student/xampp/htdocs"
+        ServerName localhost   
+    </VirtualHost>
+    
+    <VirtualHost *:80>
+        ServerAdmin webmaster@e-reteta
+        DocumentRoot "C:/Student/xampp/htdocs/vhosts/e-reteta/public"
+        ServerName e-reteta
+        ServerAlias www.e-reteta
+        ErrorLog "logs/e-reteta-error.log"
+        CustomLog "logs/e-reteta-access.log" common
+    </VirtualHost>
+   ```
+2) Instalarea dependentelor cu ajutorul comenzii:
+    ``` sh
+    cd "C:\Student\xampp\htdocs\vhosts\e-reteta
+    composer install 
+    ```
+3) Crearea bazei de date cu ajutorul comenzii:
+    ``` sh
+    php artisan migrate
+    ```
+4) Popularea bazei de date cu ajutorul comenzii:
+    ``` sh
+    php artisan db:seed
+    ```
+sau
+5) Crearea bazei de date si popularea ei cu ajutorul comenzii:
+    ``` sh
+    php artisan migrate:refresh --seed
+    ```
 
-Pentru a permite conectarea la Oracle din PHP trebuie sa activam modulul dedicat acestui tip server in fisierul `php.ini`:
-```ini
-extension=php_oci8.dll
-extension=php_oci8_11g.dll
-```
+Daca se populeaza baza de date vor fi creati urmatorii useri:
+* `admin@admin.com` cu parola `secret` - Cont de tip Administrator
+* `doctor1@clinica.com` cu parola `secret` - Cont de tip Doctor
+* `pacient1@yahoo.com` cu parola `secret` - Cont de tip Pacient
+
 
 Diagrama de Clase
 -----------------
@@ -205,7 +240,6 @@ Odata emisa o reteta, nimeni nu mai are dreptul de editare sau stergere din sist
 ![](doc/images/lista_retete_per_medic.png "Lista retetelor per medic")
 
 ##### Adaugarea unei retete
------------------------------
 
 La adaugarea unei retete, medicul vede doar pacientii introdusi in sistem in urma unei programari, altfel trebuie sa ii inregistreze si poate selecta clinica la care face consultatia, codul bolii si unul sau mai multe medicamente (pentru fiecare se realizeza un Select).
 ![](doc/images/reteta_adaugare.png "Adaugarea unei retete")
